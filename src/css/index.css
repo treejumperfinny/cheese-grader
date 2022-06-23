@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: "Karla", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+article h1 {
+  margin: 1rem 0;
+}
+
+.yas_cheese {
+  height: 500px;
+  width: auto;
+  padding-bottom: 55px;
+  padding-top: 55px;
+}
+
+p {
+  align-items: center;
+}
+
+.add_cheese {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.add_input {
+  height: 50px;
+  width: auto;
+  margin-left: 250px;
+  margin-right: 250px;
+}
+
+.comment_input {
+  height: 50px;
+  width: auto;
+  margin-right: 250px;
+  margin-left: 0px;
+}
+
+
+.add_label, .add_comment {
+  flex-direction: column;
+  display: flex;
+  padding-right: 25px;
+  font-family: "Karla", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+
+.new_form {
+  width: auto;
+  height: auto;
+  padding: 45px;
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-block: 50px;
+  background-color: rgb(255, 249, 215);
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_form, .rating_form {
+  width: auto;
+  height: auto;
+  padding: 45px;
+  align-self: center;
+  padding-bottom: 40px;
+  margin-bottom: 45px;
+  background-color: rgb(255, 249, 215);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.add_button, .comment_button {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  padding-top: 30px;
+  padding: 20px;
+}
+
+p, .comments_cheese {
+  font-size: 20px;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 50px;
+}
+
+#new {
+  padding-top: 150px;
+}
+
+.newb_cheese {
+  height: 350px;
+  width: auto;
+}
+
+.welcome_card {
+  padding-top: 95px;
+}
+
+#about, #past {
+  padding-top: 95px;
+}
+
+.past {
+  height: 300px;
+  width: auto;
+  padding-top: 15px;
+}
+
+.cheese_name {
+  padding-top: 35px;
+  border: 2px;
+  font: 18pt;
+}
+

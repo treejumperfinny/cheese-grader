@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import React, {useEffect, useState} from 'react';
+import Navbar from './components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from './components/HomePage';
+import NewCheese from './components/NewCheese';
+import AboutPage from './components/AboutPage';
+import Past from './components/Past';
 
 function App() {
+  const [cheese, setCheeses] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:9292/cheeses")
+    .then(response => response.json())
+    .then(data => setCheeses(data))
+  }, [])
+
+
   return (
+    <>
+    <Navbar />
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <HomePage />
+    <NewCheese className="new"/>
+    <Past cheese={cheese} />
+    <AboutPage />
     </div>
+    </>
   );
 }
 
