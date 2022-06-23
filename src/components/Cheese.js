@@ -2,8 +2,26 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Commenting from "./Commenting";
 import Rating from "./Rating";
+import { useEffect, useState } from "react"
 
-function Cheese( {cheese} ) {
+function Cheese({ cheese }) {
+    const [newCommentList, setCommentList] = useState([])
+
+    useEffect(() => {
+        fetch("http://localhost:9292/comments")
+            .then((res) => res.json())
+            .then((data) => setCommentList(data))
+    })
+
+    function deleteComment(id) {
+        const updatedComments = newCommentList.filter((comment) => comment.id !== id);
+        setCommentList(updatedComments);
+    }
+
+    function editCommentList(id) {
+        const editedComments = newCommentList.filter((comment) => comment.id !== id);
+        setCommentList(editedComments);
+    }
 
     return (
         <div>
@@ -16,15 +34,15 @@ function Cheese( {cheese} ) {
             <h5>Bio:</h5>
             <p> {cheese.bio} </p>
             <div className="chz_comments">
-            <Commenting cheese={cheese}/>
+                <Commenting cheese={cheese} onCommentDelete={deleteComment} onEditComment={editCommentList} />
             </div>
             <div className="chz_rate">
-            <Rating ratings={cheese.ratings} />    
+                <Rating ratings={cheese.ratings} />
             </div>
             <p>If you want to forget this fromage click the button below and it will be but a faint memory.</p>
-         
+
             <Button>Expell Cheese From Memory</Button>
-           
+
         </div>
     );
 }
