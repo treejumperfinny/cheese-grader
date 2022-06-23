@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import Comment from "./Comment";
 
 function Commenting({ cheese }) {
-    const [newComment, setNewComment] = useState({});
-    const [newEditedComment, setNewEditedComment] = useState({
-        comment_text: ""
-    })
+    const [comments, setComments] = useState(cheese.comments)
+    const [newComment, setNewComment] = useState({})
 
     function handleNewComment(e) {
         e.preventDefault()
@@ -20,32 +19,39 @@ function Commenting({ cheese }) {
             },
             body: JSON.stringify(addedComment)
         })
+        .then((resp) => resp.json())
+        .then((newComment) => setComments([...comments, newComment]))
     }
 
-    function handleDeleteClick() {
+    function handleDeleteClick(id) {
         fetch(`http://localhost:9292/comment/${id}`, {
             method: "DELETE",
         })
-            .then((resp) => resp.json())
-            .then(() => onCommentDelete(comment));
+            .then(() => removeComment(id));
     }
 
-    function handleEditComment(e) {
-        e.preventDefault()
+    function removeComment(comment_id) {
+        setComments([...comments.filter((comment) => comment.id !== comment_id)])
+    }
+
+    function handleEditComment(commentId, newCommentText) {
         const editedComment = {
-            comment_text: newEditedComment.comment
+            comment_text: newCommentText
         }
 
-        fetch(`http://localhost:9292/comment/${id}`, {
+        fetch(`http://localhost:9292/comment/${commentId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
 
             },
-            body: JSON.stringify(newEditedComment)
+            body: JSON.stringify(editedComment)
         })
-            .then((res) => res.json())
-            .then((newEditedComment) => setNewEditedComment(newEditedComment))
+            .then(() => {
+                let allComments = [...comments]
+                allComments.find((comment) => comment.id = commentId).comment_text = newCommentText
+                setComments(allComments)
+            })
     }
 
 
@@ -54,14 +60,14 @@ function Commenting({ cheese }) {
     }
 
     const showComments = () => {
-        return cheese.comments.map((comment) => {
-            return <div className="comment" key={comment.id}>{comment.comment_text}</div>
+        return comments.map((comment) => {
+            return <Comment comment={comment} onDelete={handleDeleteClick} onCommentSave={handleEditComment} />
         })
     }
 
     return <>
         <div className="comments_cheese">
-            Previous Comments:
+            <h2>Previous Comments</h2>
             {showComments()}
         </div>
         <div className='comment_form'>
@@ -71,8 +77,6 @@ function Commenting({ cheese }) {
                 </label>
                 <textarea className="comment_text form-control" name="comment" onChange={handleInputChange} />
                 <Button className="comment_button" onClick={handleNewComment}>Add Comment</Button>
-                <Button className="delete_comment" onClick={handleDeleteClick}>X</Button>
-                <Button className="edit_comment" onClick={handleEditComment}>Plz change me</Button>
             </form>
         </div>
     </>

@@ -138,3 +138,8 @@ p, .comments_cheese {
   font: 18pt;
 }
 
+
+.App .comment {
+  text-align: left;
+  padding-bottom: 20px;
+}
